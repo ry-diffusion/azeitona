@@ -13,7 +13,6 @@ func main() {
 	ircAddress := os.Getenv("IRC_SERVER")
 
 	fmt.Printf("IRC: %s\n", ircAddress)
-
 	ctx := bridge.Context{
 		DiscordToken:        discordToken,
 		IRCServer:           ircAddress,

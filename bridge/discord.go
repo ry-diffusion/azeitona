@@ -41,8 +41,13 @@ func Discord(ctx Context) error {
 		go func() {
 			for {
 				ircMessage := <-ctx.IRCMessages
+				content := strings.ReplaceAll(ircMessage.Content, "@", "")
+				if len(content) < 1 {
+					continue
+				}
+
 				_, err := s.WebhookExecute(ctx.DiscordWebhookId, ctx.DiscordWebhookToken, true, &discordgo.WebhookParams{
-					Content:  strings.ReplaceAll(ircMessage.Content, "@", ""),
+					Content:  content,
 					Username: ircMessage.Author,
 				})
 
